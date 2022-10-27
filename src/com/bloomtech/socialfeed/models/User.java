@@ -2,6 +2,8 @@ package com.bloomtech.socialfeed.models;
 
 import com.bloomtech.socialfeed.App;
 import com.bloomtech.socialfeed.observerpattern.OUserFeed;
+import com.bloomtech.socialfeed.validators.UserInfoValidator;
+import org.w3c.dom.CDATASection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,7 @@ public class User {
     public User() {
         following = new ArrayList<>();
         userFeed = new OUserFeed(this);
+        App.sourceFeed.attach(this.getUserFeed());
     }
 
     public String getUsername() {

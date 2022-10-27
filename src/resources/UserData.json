@@ -1,0 +1,9 @@
+[
+  {
+    "username": "Loner",
+    "email": "loner@email.com",
+    "password": "TestPass123",
+    "role": "DATA",
+    "following": []
+  }
+]

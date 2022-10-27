@@ -1,20 +1,14 @@
 package com.bloomtech.socialfeed.repositories;
 
+import com.bloomtech.socialfeed.models.Role;
 import com.bloomtech.socialfeed.models.User;
 import com.bloomtech.socialfeed.validators.UserInfoValidator;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class UserRepository {
     private static final String USER_DATA_PATH = "src/resources/UserData.json";
@@ -27,7 +21,6 @@ public class UserRepository {
     public List<User> getAllUsers() {
         List<User> allUsers = new ArrayList<>();
         //TODO: return parsed list of Users from UserData.json
-
         return allUsers;
     }
 
@@ -49,6 +42,15 @@ public class UserRepository {
             throw new RuntimeException("User with name: " + user.getUsername() + " already exists!");
         }
         allUsers.add(user);
+
         //TODO: Write allUsers to UserData.json
+        try (PrintWriter out = new PrintWriter(new FileWriter(USER_DATA_PATH))) {
+            Gson g = new GsonBuilder().setPrettyPrinting().create();
+            String json = g.toJson(allUsers);
+            System.out.println(json);
+            out.append(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.bloomtech.socialfeed.observerpattern;
 
+import com.bloomtech.socialfeed.App;
 import com.bloomtech.socialfeed.models.Post;
 import com.bloomtech.socialfeed.models.User;
 import com.bloomtech.socialfeed.repositories.PostRepository;
@@ -9,18 +10,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO: Implement Observer Pattern
-public class SourceFeed {
+public class SourceFeed implements Source {
     private final PostRepository postRepository = new PostRepository();
-
     private List<Post> posts;
     private List<Observer> observers;
 
+
     public SourceFeed() {
-        this.posts = new ArrayList<>();
+        posts = new ArrayList<>();
+        observers = new ArrayList<>();
     }
 
-    public void getAllPosts() {
-        postRepository.getAllPosts();
+    @Override
+    public void attach(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void detach(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void updateAll() {
+        for (Observer observer : observers) {
+            observer.update();
+        }
     }
 
     public Post addPost(User user, String body) {
@@ -28,15 +43,20 @@ public class SourceFeed {
                 LocalDateTime.now().toString(),
                 body);
         posts = postRepository.addPost(post);
-
+        attach(user.getUserFeed());
+        updateAll();
         return post;
-    }
-
-    public List<Observer> getObservers() {
-        return observers;
     }
 
     public List<Post> getPosts() {
         return posts;
+    }
+
+    public void getAllPosts() {
+        postRepository.getAllPosts();
+    }
+
+    public List<Observer> getObservers() {
+        return observers;
     }
 }

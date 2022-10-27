@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 
@@ -112,6 +113,7 @@ public class MT02_RegexValidators {
             userService.save(user);
         });
     }
+
 
     @Test
     public void createUser_InvalidEmail2_ExpectException() {
