@@ -1,20 +1,38 @@
 package com.bloomtech.socialfeed.repositories;
 
 import com.bloomtech.socialfeed.models.Post;
+import com.bloomtech.socialfeed.models.User;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Watchable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PostRepository {
     private static final String POST_DATA_PATH = "src/resources/PostData.json";
+    private List<Post> allPosts = new ArrayList<>();
 
     public PostRepository() {
     }
 
     public List<Post> getAllPosts() {
         //TODO: return all posts from the PostData.json file
-        return new ArrayList<>();
+        try {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get(POST_DATA_PATH));
+            allPosts = Arrays.asList(gson.fromJson(reader, Post[].class));
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return allPosts;
     }
 
     public List<Post> findByUsername(String username) {
@@ -25,11 +43,15 @@ public class PostRepository {
     }
 
     public List<Post> addPost(Post post) {
-        List<Post> allPosts = new ArrayList<>();
         allPosts.add(post);
-
         //TODO: Write the new Post data to the PostData.json file
-
+        try (PrintWriter out = new PrintWriter(new FileWriter(POST_DATA_PATH))) {
+            Gson g = new GsonBuilder().setPrettyPrinting().create();
+            String json = g.toJson(allPosts);
+            out.write(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } // working
         //TODO: Return an updated list of all posts
         return allPosts;
     }

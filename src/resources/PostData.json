@@ -1,0 +1,32 @@
+[
+  {
+    "username": "Leader",
+    "postedon": "2022-10-28T16:50:11.072404400",
+    "body": "Welcome everyone!"
+  },
+  {
+    "username": "Follower",
+    "postedon": "2022-10-28T16:50:11.075404900",
+    "body": "I am so excited to hear everything leader has to say!"
+  },
+  {
+    "username": "Loner",
+    "postedon": "2022-10-28T16:50:11.080406400",
+    "body": "I am not interested in what anyone has to say but myself"
+  },
+  {
+    "username": "Leader",
+    "postedon": "2022-10-28T16:50:11.177408200",
+    "body": "Welcome everyone!"
+  },
+  {
+    "username": "Follower",
+    "postedon": "2022-10-28T16:50:11.179403300",
+    "body": "I am so excited to hear everything leader has to say!"
+  },
+  {
+    "username": "Loner",
+    "postedon": "2022-10-28T16:50:11.182406300",
+    "body": "I am not interested in what anyone has to say but myself"
+  }
+]
