@@ -12,6 +12,10 @@ public class OUserFeed implements Observer {
     private User user;
     private List<Post> feed;
 
+    /**
+     * Constructor for OUserFeed.
+     * @param user that owns the feed.
+     */
     public OUserFeed(User user) {
         this.user = user;
         //TODO: update OUserFeed in constructor after implementing observer pattern
@@ -29,6 +33,10 @@ public class OUserFeed implements Observer {
         }
     }
 
+    /**
+     * Returns a list of feed/posts.
+     * @return list of post/feed
+     */
     public List<Post> getFeed() {
         List<Post> posts = new ArrayList<>();
         List<String> following = user.getFollowing();

@@ -1,6 +1,5 @@
 package com.bloomtech.socialfeed.observerpattern;
 
-import com.bloomtech.socialfeed.App;
 import com.bloomtech.socialfeed.models.Post;
 import com.bloomtech.socialfeed.models.User;
 import com.bloomtech.socialfeed.repositories.PostRepository;
@@ -16,6 +15,9 @@ public class SourceFeed implements Source {
     private List<Observer> observers;
 
 
+    /**
+     * Constructor for SourceFeed class.
+     */
     public SourceFeed() {
         posts = new ArrayList<>();
         observers = new ArrayList<>();
@@ -38,9 +40,15 @@ public class SourceFeed implements Source {
         }
     }
 
+    /**
+     * Add's a post under a user.
+     * @param user owner of the post
+     * @param body content of a post
+     * @return posted by the user
+     */
     public Post addPost(User user, String body) {
         Post post = new Post(user.getUsername(),
-                LocalDateTime.now().toString(),
+                LocalDateTime.now(),
                 body);
         posts = postRepository.addPost(post);
         attach(user.getUserFeed());
@@ -52,6 +60,9 @@ public class SourceFeed implements Source {
         return posts;
     }
 
+    /**
+     * Get all posts from users.
+     */
     public void getAllPosts() {
         postRepository.getAllPosts();
     }

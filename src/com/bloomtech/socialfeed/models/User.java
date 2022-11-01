@@ -2,8 +2,6 @@ package com.bloomtech.socialfeed.models;
 
 import com.bloomtech.socialfeed.App;
 import com.bloomtech.socialfeed.observerpattern.OUserFeed;
-import com.bloomtech.socialfeed.validators.UserInfoValidator;
-import org.w3c.dom.CDATASection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +16,9 @@ public class User {
     //transient properties are not written to JSON
     private transient OUserFeed userFeed;
 
+    /**
+     * Constructor for User.
+     */
     public User() {
         following = new ArrayList<>();
         userFeed = new OUserFeed(this);
@@ -82,6 +83,10 @@ public class User {
                 '}';
     }
 
+    /**
+     * Adds a user to follow.
+     * @param usernameToFollow username to follow
+     */
     public void follow(String usernameToFollow) {
         following.add(usernameToFollow);
     }

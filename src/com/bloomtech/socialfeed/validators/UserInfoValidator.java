@@ -40,6 +40,8 @@ public class UserInfoValidator implements Validator {
             throw new UserValidationException("Invalid Password: Password must be at least 8 characters long, " +
                     "contain at least one uppercase letter, one lowercase letter, and one special character!");
         }
-        if (user.getRole() == null) { user.setRole(Role.USER); }
+        if (user.getRole() == null) {
+            user.setRole(Role.USER);
+        }
     }
 }

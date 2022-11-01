@@ -12,6 +12,9 @@ import java.util.List;
 public class SeedData {
     private static final UserRepository userRepository = new UserRepository();
 
+    /**
+     * Method for adding multiple user data.
+     */
     public static void run() {
         File userDataFile = new File(App.USER_FILE_PATH);
         userDataFile.delete();
@@ -26,22 +29,22 @@ public class SeedData {
         }
 
         User leader = new User();
-            leader.setUsername("Leader");
-            leader.setEmail("leader@email.com");
-            leader.setPassword("TestPass123");
-            leader.setRole(Role.ADMIN);
+        leader.setUsername("Leader");
+        leader.setEmail("leader@email.com");
+        leader.setPassword("TestPass123");
+        leader.setRole(Role.ADMIN);
 
         User follower = new User();
-            follower.setUsername("Follower");
-            follower.setEmail("follower@email.com");
-            follower.setPassword("TestPass123");
-            follower.setRole(Role.USER);
+        follower.setUsername("Follower");
+        follower.setEmail("follower@email.com");
+        follower.setPassword("TestPass123");
+        follower.setRole(Role.USER);
 
         User loner = new User();
-            loner.setUsername("Loner");
-            loner.setEmail("loner@email.com");
-            loner.setPassword("TestPass123");
-            loner.setRole(Role.DATA);
+        loner.setUsername("Loner");
+        loner.setEmail("loner@email.com");
+        loner.setPassword("TestPass123");
+        loner.setRole(Role.DATA);
 
         leader.follow(follower.getUsername());
 
